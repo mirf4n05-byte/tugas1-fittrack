@@ -1,8 +1,0 @@
-# Hasil kompilasi
-*.class
-out/
-target/
-
-# Berkas pengaturan IntelliJ
-.idea/
-*.iml
