@@ -10,13 +10,17 @@ public class Member {
     private String nama = NILAI_KOSONG;
     private String noTelepon = NILAI_KOSONG;
     private String tanggalDaftar = NILAI_KOSONG;
-    private String jenisPaket = PAKET_BASIC; 
+    private String jenisPaket = PAKET_BASIC;
 
     public String getNama() {
         return nama;
     }
 
     public void setNama(String nama) {
+        if (nama == null || nama.trim().isEmpty()) {
+            System.out.println("Nama tidak boleh kosong atau hanya berisi spasi");
+            return;
+        }
         this.nama = nama;
     }
 
