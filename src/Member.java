@@ -29,6 +29,18 @@ public class Member {
     }
 
     public void setNoTelepon(String noTelepon) {
+        if (noTelepon == null || noTelepon.trim().isEmpty()) {
+            System.out.println("Nomor telepon tidak boleh kosong atau hanya berisi spasi");
+            return;
+        }
+        if (!noTelepon.startsWith(AWALAN_TELEPON)) {
+            System.out.println("Nomor telepon harus diawali angka " + AWALAN_TELEPON);
+            return;
+        }
+        if (noTelepon.length() < PANJANG_MINIMAL_TELEPON) {
+            System.out.println("Nomor telepon minimal " + PANJANG_MINIMAL_TELEPON + " digit");
+            return;
+        }
         this.noTelepon = noTelepon;
     }
 
