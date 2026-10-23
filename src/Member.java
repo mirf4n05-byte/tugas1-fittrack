@@ -49,6 +49,10 @@ public class Member {
     }
 
     public void setTanggalDaftar(String tanggalDaftar) {
+        if (tanggalDaftar == null || tanggalDaftar.trim().isEmpty()) {
+            System.out.println("Tanggal daftar tidak boleh kosong atau hanya berisi spasi");
+            return;
+        }
         this.tanggalDaftar = tanggalDaftar;
     }
 
@@ -56,7 +60,7 @@ public class Member {
         return jenisPaket;
     }
 
-   public void setJenisPaket(String jenisPaket) {
+    public void setJenisPaket(String jenisPaket) {
         if (!PAKET_BASIC.equals(jenisPaket)
             && !PAKET_PREMIUM.equals(jenisPaket)
             && !PAKET_VIP.equals(jenisPaket)) {
@@ -64,6 +68,6 @@ public class Member {
                 + PAKET_PREMIUM + ", atau " + PAKET_VIP);
             return;
         }
-    this.jenisPaket = jenisPaket;
+        this.jenisPaket = jenisPaket;
     }
 }
