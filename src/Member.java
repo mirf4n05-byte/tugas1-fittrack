@@ -12,6 +12,17 @@ public class Member {
     private String tanggalDaftar = NILAI_KOSONG;
     private String jenisPaket = PAKET_BASIC;
 
+    public Member(String nama, String noTelepon, String tanggalDaftar, String jenisPaket) {
+        setNama(nama);
+        setNoTelepon(noTelepon);
+        setTanggalDaftar(tanggalDaftar);
+        setJenisPaket(jenisPaket);
+    }
+
+    public Member(String nama, String noTelepon, String tanggalDaftar) {
+        this(nama, noTelepon, tanggalDaftar, PAKET_BASIC);
+    }
+    
     public String getNama() {
         return nama;
     }
