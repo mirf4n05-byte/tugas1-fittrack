@@ -81,4 +81,9 @@ public class Member {
         }
         this.jenisPaket = jenisPaket;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" + "nama='" + nama + '\'' + ", noTelepon='" + noTelepon + '\'' + ", tanggalDaftar='" + tanggalDaftar + '\'' + ", jenisPaket='" + jenisPaket + '\'' + '}';
+    }
 }
