@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 /**
  * Kelas ini merepresentasikan data member dalam sistem GymFittrack dan
  * memeriksa perubahan data sebelum menyimpan
@@ -20,7 +24,8 @@ public class Member {
     private String noTelepon = NILAI_KOSONG;
     private String tanggalDaftar = NILAI_KOSONG;
     private String jenisPaket = PAKET_BASIC;
-
+    private static final DateTimeFormatter FORMAT_TANGGAL =
+        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
     /**
      * Membuat member baru dengan keempat data lengkap. Data yang tidak
      * valid ditolak oleh setter, dan atribut tetap berisi nilai awalnya.
@@ -120,21 +125,30 @@ public class Member {
     }
 
     /**
-     * Mengubah tanggal pendaftaran member. Tanggal yang null, kosong,
-     * atau hanya berisi spasi ditolak: pesan dicetak dan tanggal lama
-     * dipertahankan.
+     * Mengubah tanggal pendaftaran member. Tanggal diterima hanya jika
+     * berformat dd-MM-yyyy, benar-benar ada di kalender, dan tidak melebihi 
+     * hari ini. Jika tidak, pesan dicetak dan tanggal lama dipertahankan.
      *
-     * @param tanggalDaftar tanggal pendaftaran baru
+     * @param tanggalDaftar tanggal pendaftaran baru, berformat dd-MM-yyyy
      */
-
     public void setTanggalDaftar(String tanggalDaftar) {
         if (tanggalDaftar == null || tanggalDaftar.trim().isEmpty()) {
-            System.out.println("Tanggal pendaftaran tidak boleh kosong atau hanya berisi spasi");
-            return;
-        }
-        this.tanggalDaftar = tanggalDaftar;
+        System.out.println("Tanggal daftar tidak boleh kosong atau hanya berisi spasi");
+        return;
     }
-
+    LocalDate tanggal;
+    try {
+        tanggal = LocalDate.parse(tanggalDaftar.trim(), FORMAT_TANGGAL);
+    } catch (DateTimeParseException e) {
+        System.out.println("Tanggal harus berformat dd-MM-yyyy dan benar-benar ada, contoh: 17-08-2026");
+        return;
+    }
+    if (tanggal.isAfter(LocalDate.now())) {
+        System.out.println("Tanggal daftar tidak boleh melebihi hari ini");
+        return;
+    }
+    this.tanggalDaftar = tanggalDaftar.trim();
+}
     /**
      * Mengambil jenis paket keanggotaan member.
      *
