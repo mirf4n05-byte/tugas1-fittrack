@@ -2,15 +2,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+
 /**
- * Kelas ini merepresentasikan data member dalam sistem GymFittrack dan
- * memeriksa perubahan data sebelum menyimpan
- * 
- * @author Muhammad Irfan
+ * Kelas ini merepresentasikan data member dalam sistem Gym FitTrack dan
+ * memeriksa perubahan data sebelum menyimpan.
+ *
  * @version 1.0
  * @since 2026
  */
-
 public class Member {
 
     private static final int PANJANG_MINIMAL_TELEPON = 10;
@@ -19,13 +18,14 @@ public class Member {
     private static final String PAKET_PREMIUM = "Premium";
     private static final String PAKET_VIP = "VIP";
     private static final String NILAI_KOSONG = "Belum diisi";
+    private static final DateTimeFormatter FORMAT_TANGGAL =
+            DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
 
     private String nama = NILAI_KOSONG;
     private String noTelepon = NILAI_KOSONG;
     private String tanggalDaftar = NILAI_KOSONG;
     private String jenisPaket = PAKET_BASIC;
-    private static final DateTimeFormatter FORMAT_TANGGAL =
-        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+
     /**
      * Membuat member baru dengan keempat data lengkap. Data yang tidak
      * valid ditolak oleh setter, dan atribut tetap berisi nilai awalnya.
@@ -35,7 +35,6 @@ public class Member {
      * @param tanggalDaftar tanggal member pertama kali mendaftar
      * @param jenisPaket    paket keanggotaan: Basic, Premium, atau VIP
      */
-
     public Member(String nama, String noTelepon, String tanggalDaftar, String jenisPaket) {
         setNama(nama);
         setNoTelepon(noTelepon);
@@ -51,7 +50,6 @@ public class Member {
      * @param noTelepon     nomor telepon, diawali 0 dan minimal 10 digit
      * @param tanggalDaftar tanggal member pertama kali mendaftar
      */
-
     public Member(String nama, String noTelepon, String tanggalDaftar) {
         this(nama, noTelepon, tanggalDaftar, PAKET_BASIC);
     }
@@ -61,7 +59,6 @@ public class Member {
      *
      * @return nama lengkap member
      */
-
     public String getNama() {
         return nama;
     }
@@ -72,7 +69,6 @@ public class Member {
      *
      * @param nama nama lengkap baru
      */
-
     public void setNama(String nama) {
         if (nama == null || nama.trim().isEmpty()) {
             System.out.println("Nama tidak boleh kosong atau hanya berisi spasi");
@@ -86,7 +82,6 @@ public class Member {
      *
      * @return nomor telepon member
      */
-
     public String getNoTelepon() {
         return noTelepon;
     }
@@ -98,7 +93,6 @@ public class Member {
      *
      * @param noTelepon nomor telepon baru
      */
-
     public void setNoTelepon(String noTelepon) {
         if (noTelepon == null || noTelepon.trim().isEmpty()) {
             System.out.println("Nomor telepon tidak boleh kosong atau hanya berisi spasi");
@@ -126,29 +120,30 @@ public class Member {
 
     /**
      * Mengubah tanggal pendaftaran member. Tanggal diterima hanya jika
-     * berformat dd-MM-yyyy, benar-benar ada di kalender, dan tidak melebihi 
+     * berformat dd-MM-yyyy, benar-benar ada di kalender, dan tidak melebihi
      * hari ini. Jika tidak, pesan dicetak dan tanggal lama dipertahankan.
      *
      * @param tanggalDaftar tanggal pendaftaran baru, berformat dd-MM-yyyy
      */
     public void setTanggalDaftar(String tanggalDaftar) {
         if (tanggalDaftar == null || tanggalDaftar.trim().isEmpty()) {
-        System.out.println("Tanggal daftar tidak boleh kosong atau hanya berisi spasi");
-        return;
+            System.out.println("Tanggal daftar tidak boleh kosong atau hanya berisi spasi");
+            return;
+        }
+        LocalDate tanggal;
+        try {
+            tanggal = LocalDate.parse(tanggalDaftar.trim(), FORMAT_TANGGAL);
+        } catch (DateTimeParseException e) {
+            System.out.println("Tanggal harus berformat dd-MM-yyyy dan benar-benar ada, contoh: 17-08-2026");
+            return;
+        }
+        if (tanggal.isAfter(LocalDate.now())) {
+            System.out.println("Tanggal daftar tidak boleh melebihi hari ini");
+            return;
+        }
+        this.tanggalDaftar = tanggalDaftar.trim();
     }
-    LocalDate tanggal;
-    try {
-        tanggal = LocalDate.parse(tanggalDaftar.trim(), FORMAT_TANGGAL);
-    } catch (DateTimeParseException e) {
-        System.out.println("Tanggal harus berformat dd-MM-yyyy dan benar-benar ada, contoh: 17-08-2026");
-        return;
-    }
-    if (tanggal.isAfter(LocalDate.now())) {
-        System.out.println("Tanggal daftar tidak boleh melebihi hari ini");
-        return;
-    }
-    this.tanggalDaftar = tanggalDaftar.trim();
-}
+
     /**
      * Mengambil jenis paket keanggotaan member.
      *
@@ -164,7 +159,6 @@ public class Member {
      *
      * @param jenisPaket jenis paket baru
      */
-
     public void setJenisPaket(String jenisPaket) {
         if (!PAKET_BASIC.equals(jenisPaket)
                 && !PAKET_PREMIUM.equals(jenisPaket)
@@ -181,10 +175,13 @@ public class Member {
      *
      * @return representasi teks data member
      */
-
     @Override
     public String toString() {
-        return "Member{" + "nama='" + nama + '\'' + ", noTelepon='" + noTelepon + '\'' + ", tanggalDaftar='"
-                + tanggalDaftar + '\'' + ", jenisPaket='" + jenisPaket + '\'' + '}';
+        return "Member{"
+                + "nama='" + nama + '\''
+                + ", noTelepon='" + noTelepon + '\''
+                + ", tanggalDaftar='" + tanggalDaftar + '\''
+                + ", jenisPaket='" + jenisPaket + '\''
+                + '}';
     }
 }

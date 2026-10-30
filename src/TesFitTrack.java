@@ -14,9 +14,9 @@ public class TesFitTrack {
     public static void main(String[] args) {
         Member[] daftarMember = new Member[JUMLAH_MEMBER];
 
-        System.out.println("=== Skenario 1: memasukkan 4 data member dengan data valid dan 1 member tanpa paket ===");
+        System.out.println("=== Skenario 1: membuat 4 member dengan data valid (1 tanpa paket) ===");
         isiMemberValid(daftarMember);
-
+        
         System.out.println("=== Skenario 2: membuat 1 member dengan data tidak valid ===");
         isiMemberTidakValid(daftarMember);
 
