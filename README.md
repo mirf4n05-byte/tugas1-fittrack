@@ -32,3 +32,35 @@ tugas1-fittrack/
 
 - JDK Version 26.0.2.1
 - IDE yang disarankan: Visual Studio Code dengan Extension Pack for Java
+
+## Cara Menjalankan Program
+
+### Lewat IntelliJ IDEA
+
+1. Buka IntelliJ, pilih File, Open, lalu pilih folder `tugas1-fittrack`.
+2. Pastikan folder `src` bertanda biru. Kalau belum, klik kanan `src`, pilih Mark Directory as, lalu Sources Root.
+3. Buka `TesFitTrack.java`, lalu klik ikon segitiga hijau di samping method `main`.
+4. Pilih Run 'TesFitTrack.main()'. Hasilnya muncul di panel Run di bagian bawah.
+
+### Lewat command line
+
+Jalankan dari folder utama project:
+
+```bash
+javac -d out src/Member.java src/TesFitTrack.java
+java -cp out TesFitTrack
+```
+
+Perintah pertama mengompilasi kedua file dan menaruh hasilnya di folder `out`. Perintah kedua menjalankan program.
+
+## Konsep OOP yang Diterapkan
+
+| Konsep | Lokasi | Alasan |
+| --- | --- | --- |
+| Class dan object | `Member`; objeknya dibuat di `TesFitTrack` | Data member dikemas dalam 1 file class Member agar nantinya data satu member menjadi satu paket |
+| Encapsulation | Atribut `private`, getter dan setter di `Member` | perubahan data bisa lewat setter yang memvalidasi atribut tersebut |
+| Constructor overloading dan `this(...)` | Dua constructor di `Member` | Pendaftaran member tanpa disertai nama paket akan otomatis dilabelkan dengan basic |
+| Validasi di setter, dipanggil constructor | Setter dan constructor di `Member` | Aturan cukup ditulis sekali saja (prinsip DRY) dengan constructor memanggil setter |
+| Override `toString()` | `Member` | Menimpa method object sehingga object akan tercetak sebagai teks berlabel, bukan alamat memori |
+| Array dan perulangan `for` | `TesFitTrack` | dapat menyimpan dan mencetak data member sekaligus |
+| Konstanta `final` | `Member` | Magic number dan magic String akan muncul jika tidak dipakai |
