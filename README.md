@@ -64,3 +64,33 @@ Perintah pertama mengompilasi kedua file dan menaruh hasilnya di folder `out`. P
 | Override `toString()` | `Member` | Menimpa method object sehingga object akan tercetak sebagai teks berlabel, bukan alamat memori |
 | Array dan perulangan `for` | `TesFitTrack` | dapat menyimpan dan mencetak data member sekaligus |
 | Konstanta `final` | `Member` | Magic number dan magic String akan muncul jika tidak dipakai |
+
+## Nilai Default
+
+Kalau data yang masuk melalui constructor melanggar aturan validasi, setter menolaknya dan atribut tetap berisi nilai awal. Dengan begitu objek tetap terbentuk dan program tidak berhenti paksa hanya karena satu field salah.
+
+| Atribut | Nilai default | Alasan |
+| --- | --- | --- |
+| `nama` | `Belum diisi` | Keterangan bahwa nama wajib untuk diisi |
+| `noTelepon` | `Belum diisi` | nomor yang tak dimulai dari 0 melanggar aturan |
+| `tanggalDaftar` | `Belum diisi` | Tanggal tidak bisa ditebak, harus pasti sesuai tanggal pendaftaran |
+| `jenisPaket` | `Basic` | Paket dasar sekaligus yang menjadi jenis paket jika staf tak mengisi paket pelanggan |
+
+Nilai-nilai ini disimpan sebagai konstanta (`NILAI_KOSONG` dan `PAKET_BASIC`) di class `Member`, jadi bisa diubah dari satu tempat. Pada setter yang dipanggil setelah objek jadi, yang dipertahankan adalah nilai lama yang sudah benar.
+
+## Batasan dan Pengembangan Lanjutan
+
+Batasan saat ini:
+
+- Data hanya tersimpan selama program berjalan dan hilang saat program berhenti.
+- Data uji masih ditulis langsung di kode, belum ada input dari keyboard atau antarmuka untuk staf.
+- Nomor telepon baru diperiksa awalan dan panjangnya, belum diperiksa bahwa semuanya angka.
+- Jenis paket peka huruf besar-kecil, jadi `premium` ditolak.
+- Aturan tanggal (format dd-MM-yyyy dan tidak boleh melebihi hari ini) adalah tambahan dari saya sendiri, karena soal hanya meminta format yang konsisten.
+
+Pengembangan lanjutan:
+
+- Menggunakan software lanjutan seperti postgreSQL untuk menyimpan data ke database supaya lebih terstruktur.
+- Menambah menu input dan pencarian member agar staf bisa memakainya langsung.
+- Handling error lanjutan
+- Pembuatan program dengan GUI
