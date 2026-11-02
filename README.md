@@ -24,6 +24,7 @@ tugas1-fittrack/
   src/
     Member.java
     TesFitTrack.java
+  screenshots/
   .gitignore
   README.md
 ```
@@ -78,6 +79,15 @@ Kalau data yang masuk melalui constructor melanggar aturan validasi, setter meno
 
 Nilai-nilai ini disimpan sebagai konstanta (`NILAI_KOSONG` dan `PAKET_BASIC`) di class `Member`, jadi bisa diubah dari satu tempat. Pada setter yang dipanggil setelah objek jadi, yang dipertahankan adalah nilai lama yang sudah benar.
 
+## Screenshot Skenario
+
+Skenario 1: Data normal tanpa kesalahan
+![Output skenario 1](screenshots/skenario1.png)
+
+Skenario 2: Data member dengan kesalahan dan pengecekan validasi
+![Output skenario 1](screenshots/skenario2.png)
+
+
 ## Batasan dan Pengembangan Lanjutan
 
 Batasan saat ini:
@@ -89,7 +99,6 @@ Batasan saat ini:
 - Aturan tanggal (format dd-MM-yyyy dan tidak boleh melebihi hari ini) adalah tambahan dari saya sendiri, karena soal hanya meminta format yang konsisten.
 
 Pengembangan lanjutan:
-
 - Menggunakan software lanjutan seperti postgreSQL untuk menyimpan data ke database supaya lebih terstruktur.
 - Menambah menu input dan pencarian member agar staf bisa memakainya langsung.
 - Handling error lanjutan
